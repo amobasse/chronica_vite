@@ -1,61 +1,67 @@
-import { User } from '../types/User';
-import { v4 as uuidv4 } from 'uuid';
+import { User } from "../types/User";
+import { v4 as uuidv4 } from "uuid";
 
-const USER_STORAGE_KEY = 'app_users';
-
-const getAllUsers = (): User[] => {
-    const usersJSON = localStorage.getItem(USER_STORAGE_KEY);
-    return usersJSON ? JSON.parse(usersJSON) : [];
-};
-
-const saveAllUsers = (users: User[]): void => {
-    localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(users));
-};
+const API_URL = "http://localhost:3001/api";
 
 type RegParams = {
-    username: string;
-    email: string;
-    password: string;
+  username: string;
+  email: string;
+  password: string;
 };
 
 type LoginParams = {
-    email: string;
-    password: string;
+  email: string;
+  password: string;
 };
 
-export const registerUser = ({ username, email, password}: RegParams): { success: boolean, message?: string } => {
+export const registerUser = async ({
+  username,
+  email,
+  password,
+}: RegParams): Promise<{ success: boolean; message?: string }> => {
+  try {
+    // get all users from API backend
+    const response = await fetch(`${API_URL}/users/register`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username, email, password }),
+    });
 
-    //pull all existing users
-    //check if user already exists
-    //if so, throw an error? or just log them in?
-    //if not, create new user
-    //log to file
+    const data = await response.json();
 
-    const users: User[] = getAllUsers();
-
-    //if email is in here?
-    if (users.some(user => user.email == email)) {
-        return { success: false, message: `Email already used.`};
+    if (!response.ok) {
+        return { success: false, message: `An error occured: ${data.message}` };
     }
 
-    if (users.some(user => user.username == username)) {
-        return { success: false, message: `Username already taken.`};
-    }
-
-    const newUser: User = {
-        id: uuidv4(),
-        username: username,
-        email: email,
-        password: password
-    }
-
-    users.push(newUser);
-    saveAllUsers(users);
-
-    return ( { success: true } );
+    return data;
+  } catch (error) {
+    console.error(`Error occurred during registration process.`);
+    return { success: false, message: `Network error.` };
+  }
 };
 
-export const loginUser = ({ email, password }: LoginParams) => {
+export const loginUser = async ({ email, password }: LoginParams): Promise<{ success: boolean, message?: string }> => {
+   try {
+     // get all users from API backend
+     const response = await fetch(`${API_URL}/users/login`, {
+       method: "POST",
+       headers: {
+         "Content-Type": "application/json",
+       },
+       body: JSON.stringify({ email, password }),
+     });
 
+     const data = await response.json();
 
+     if (!response.ok) {
+       return { success: false, message: `An error occured: ${data.message}` };
+     }
+
+     return data;
+   } catch (error) {
+     console.error(`Error occurred during login process.`);
+     return { success: false, message: `Network error.` };
+   } 
 };
