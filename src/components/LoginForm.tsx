@@ -2,16 +2,21 @@ import { useState } from 'react';
 import { loginUser } from '../services/userService';
 
 const LoginForm = () => {
-    const [username, setUsername] = useState<string>();
-    const [email, setEmail] = useState<string>();
-    const [password, setPassword] = useState<string>();
+    const [username, setUsername] = useState<string>('');
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
     const [message, setMessage] = useState<string>();
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
+        if (!email || !password) {
+            setMessage(`You must enter email and password.`);
+            return;
+        }
+
         try {
-            const result = await loginUser(email, password);
+            const result = await loginUser({ email, password });
 
             if (result.success) {
                 setMessage(`Welcome back, ${username}!`);
@@ -24,7 +29,6 @@ const LoginForm = () => {
         }
 
     };
-
 
     return (
         <form onSubmit={handleSubmit}>
@@ -45,7 +49,12 @@ const LoginForm = () => {
                     required
                 />
 
-                <button type='submit'>Login</button>
+                <button
+                    type='submit'
+                    disabled={!email || !password}
+                >
+                    Login
+                </button>
                 {
                     message && <p className='message'>{message}</p>
                 }
