@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { loginUser } from '../services/userService';
+import { useAuth } from '../App.tsx';
 
 const LoginForm = () => {
+    const { setUser } = useAuth();
     const [username, setUsername] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
