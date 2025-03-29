@@ -12,7 +12,18 @@ const saveAllUsers = (users: User[]): void => {
     localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(users));
 };
 
-export const registerUser = (username: string, email: string, password: string): { success: boolean, message?: string } => {
+type RegParams = {
+    username: string;
+    email: string;
+    password: string;
+};
+
+type LoginParams = {
+    email: string;
+    password: string;
+};
+
+export const registerUser = ({ username, email, password}: RegParams): { success: boolean, message?: string } => {
 
     //pull all existing users
     //check if user already exists
@@ -44,7 +55,7 @@ export const registerUser = (username: string, email: string, password: string):
     return ( { success: true } );
 };
 
-export const loginUser = (email: string, password: string) => {
+export const loginUser = ({ email, password }: LoginParams) => {
 
 
 };
