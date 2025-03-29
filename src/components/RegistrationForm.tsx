@@ -62,7 +62,7 @@ const RegistrationForm = () => {
                     type='submit'
                     disabled={!username || !email || !password}
                 >
-                    Login
+                    Create Account
                 </button>
                 {
                     message && <p className='message'>{message}</p>
