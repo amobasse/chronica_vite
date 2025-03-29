@@ -19,7 +19,7 @@ const LoginForm = () => {
             const result = await loginUser({ email, password });
 
             if (result.success) {
-                setMessage(`Welcome back, ${username}!`);
+                setMessage(`Welcome back, ${username}!`); //need to actually get the username somehow
             } else {
                 setMessage(`Invalid username or password.`);
             }
@@ -33,7 +33,7 @@ const LoginForm = () => {
     return (
         <form onSubmit={handleSubmit}>
             <div className='form-group'>
-                <label htmlFor='Username'>Username:</label>
+                <label htmlFor='Email'>Email:</label>
                 <input
                     type='text'
                     id='email'
@@ -41,6 +41,7 @@ const LoginForm = () => {
                     onChange={ (e) => setEmail(e.target.value)}
                     required
                 />
+                <label htmlFor='Password'>Password:</label>
                 <input
                     type='password'
                     id='password'
