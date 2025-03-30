@@ -3,7 +3,11 @@ import { useAuth } from "../App";
 import CharacterCard from '../types/CharacterCard';
 import profilePic from "../../images/profilePictures/ceciliaprofile.png";
 
-const Card = () => {
+type CardProps = {
+    character: CharacterCard;
+};
+
+const Card = ({ character }: CardProps) => {
     
     return (
         // have image with border-radius being 50%
@@ -18,8 +22,12 @@ const Card = () => {
         // as well as a button somewhere to add new cards
         <div className="card">
             <img className="card-image" src={profilePic} alt='Profile picture for Cecilia'></img>
-            <h2 className="card-title">mAcular</h2>
-            <p className="card-text">This is a character card.</p>
+            <h2 className="card-title">{character.characterName}</h2>
+            <div className="card-text">
+                <p><strong>Level:</strong> {character.level}</p>
+                <p><strong>Race:</strong> {character.race}</p>
+                <p><strong>Class:</strong> {character.class}</p>
+            </div>
         </div>
     );
 }
