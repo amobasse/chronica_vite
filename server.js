@@ -25,6 +25,7 @@ console.log(`dirname is ${__dirname}`);
 
 const USERS_FILE = path.join(__dirname, 'data', 'users.json');
 const CHARACTERS_FILE = path.join(__dirname, 'data', 'characters.json');
+const dataDir = path.join(__dirname, 'data');
 
 const initializeDataStorage = () => {
   try {
