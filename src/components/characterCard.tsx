@@ -12,6 +12,9 @@ const Card = () => {
         // somewhere the card has to get the info, either in the card itself or passed in
         // it has to populate each card based on the user, likely a for loop or foreach
         // passed in via context...
+        // also need a button to update the info
+        // and a button to delete the card
+        // as well as a button somewhere to add new cards
         <div className="card">
             
         </div>
