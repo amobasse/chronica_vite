@@ -21,7 +21,45 @@ const __dirname = path.dirname(__filename);
 console.log(`filename is ${__filename}`);
 console.log(`dirname is ${__dirname}`);
 
+//create the dir and file if they aren't made yet
+
 const USERS_FILE = path.join(__dirname, 'data', 'users.json');
+
+const initializeDataStorage = () => {
+  try {
+    // Check if data directory exists
+    if (!fs.existsSync(dataDir)) {
+      console.log(`Data directory does not exist. Creating: ${dataDir}`);
+      fs.mkdirSync(dataDir, { recursive: true });
+      console.log(`Data directory created successfully`);
+    } else {
+      console.log(`Data directory exists: ${dataDir}`);
+    }
+
+    // Check if users.json file exists
+    if (!fs.existsSync(USERS_FILE)) {
+      console.log(`Users file does not exist. Creating: ${USERS_FILE}`);
+      fs.writeFileSync(USERS_FILE, JSON.stringify([], null, 2));
+    } else {
+      console.log(`Users file exists: ${USERS_FILE}`);
+      
+      // Validate if the file contains valid JSON
+      try {
+        const data = fs.readFileSync(USERS_FILE, 'utf8');
+        JSON.parse(data);
+      } catch (parseError) {
+        console.warn(`Users file contains invalid JSON.`);
+      }
+    }
+
+    return true;
+  } catch (error) {
+    console.error(`Failed to initialize data storage:`, error);
+    return false;
+  }
+};
+
+initializeDataStorage();
 
 try {
     const testRead = fs.readFileSync(USERS_FILE, 'utf8');
