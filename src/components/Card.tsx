@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useAuth } from "../App";
 import CharacterCard from '../types/CharacterCard';
-import profilePic from '../images/profilePic/ceciliaprofile.png';
+import profilePic from "../../images/profilePictures/ceciliaprofile.png";
 
 const Card = () => {
     
