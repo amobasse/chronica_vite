@@ -45,8 +45,9 @@ export const registerUser = async ({
 export const loginUser = async ({
   email,
   password,
-}: LoginParams): Promise<{ success: boolean; message?: string }> => {
+}: LoginParams): Promise<{ success: boolean; user?: User; message?: string }> => {
   try {
+    console.log(`API URL is ${API_URL}/users/login`);
     // get all users from API backend
     const response = await fetch(`${API_URL}/users/login`, {
       method: "POST",
@@ -61,7 +62,7 @@ export const loginUser = async ({
     if (!response.ok) {
       return { success: false, message: `An error occured: ${data.message}` };
     }
-
+    console.log(JSON.stringify(data));
     return data;
   } catch (error) {
     console.error(`Error occurred during login process.`);

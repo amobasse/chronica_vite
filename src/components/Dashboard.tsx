@@ -7,7 +7,7 @@ const Dashboard = () => {
 
   const handleLogout = () => {
     setUser(null);
-    setShowLogin(false);
+    setShowLogin(true);
   }
 
   return (

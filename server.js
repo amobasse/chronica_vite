@@ -109,18 +109,18 @@ app.post('/api/users/register', (req, res) => {
     }
 });
 
-app.post('/api/users/login'), (req, res) => {
+app.post('/api/users/login', (req, res) => {
     const users = getUsers();
-    const { username, password } = req.body;
+    const { email, password } = req.body;
 
-    if (!username || !password) {
+    if (!email || !password) {
         return res.status(400).json({
             success: false,
-            message: 'You need both the username and password.'
+            message: 'You need both the email and password.'
         });
     }
 
-    const user = users.find(user => user.username == username && user.password == password);
+    const user = users.find(user => user.email == email && user.password == password);
 
     if (user) {
         const { password, ...userWithoutPassword } = user;
@@ -131,10 +131,10 @@ app.post('/api/users/login'), (req, res) => {
     } else {
         res.status(401).json({
             success: false,
-            message: 'Invalid username or password.'
+            message: 'Invalid email or password.'
         });
     }
-}
+});
 
 app.listen(PORT, () => {
     console.log(`The server is listening on http://localhost:${PORT}`);

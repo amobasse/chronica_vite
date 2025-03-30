@@ -3,7 +3,7 @@ import { loginUser } from '../services/userService';
 import { useAuth } from '../App.tsx';
 
 const LoginForm = () => {
-    const { setUser } = useAuth();
+    const { user, setUser } = useAuth();
     const [username, setUsername] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
@@ -11,6 +11,8 @@ const LoginForm = () => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        console.log(`Email is ${email}`);
 
         if (!email || !password) {
             setMessage(`You must enter email and password.`);
@@ -20,8 +22,11 @@ const LoginForm = () => {
         try {
             const result = await loginUser({ email, password });
 
-            if (result.success) {
-                setMessage(`Welcome back, ${username}!`); //need to actually get the username somehow
+            console.log(`On login, email is ${email} and password is ${password}.`);
+            console.log(JSON.stringify(result));
+            if (result.success && result.user?.username) {
+                setUser(result.user);
+                setMessage(`Welcome back, ${user?.username}!`);
             } else {
                 setMessage(`Invalid username or password.`);
             }
@@ -41,6 +46,7 @@ const LoginForm = () => {
                     id='email'
                     value={email}
                     onChange={ (e) => setEmail(e.target.value)}
+                    autoComplete="email"
                     required
                 />
                 <label htmlFor='Password'>Password:</label>
@@ -54,7 +60,7 @@ const LoginForm = () => {
 
                 <button
                     type='submit'
-                    disabled={!email || !password}
+                    //disabled={!email || !password}
                 >
                     Login
                 </button>
