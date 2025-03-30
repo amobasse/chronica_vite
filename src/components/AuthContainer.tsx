@@ -3,17 +3,13 @@ import LoginForm from './LoginForm';
 import RegistrationForm from './RegistrationForm';
 import { User } from '../types/User';
 import Dashboard from './Dashboard';
+import { useAuth } from '../App';
 
 const AuthContainer = () => {
-    const [showLogin, setShowLogin] = useState(true);
-    const [user, setUser] = useState<User | null>();
-
-    const handleLoginSuccess = (loggedInUser: User) => {
-        setUser(loggedInUser);
-    };
+    const { user, showLogin, setShowLogin } = useAuth();
 
     if (user) {
-        return <Dashboard user={user} />
+        return <Dashboard/>
     }
     return (
         <div className="auth-container">
@@ -21,9 +17,9 @@ const AuthContainer = () => {
 
             {
                 showLogin ?
-                    ( <LoginForm onLoginSuccess={handleLoginSuccess}/> )
+                    ( <LoginForm/> )
                     :
-                    ( <RegistrationForm onRegisterSuccess={() => setShowLogin(true)}/> )    
+                    ( <RegistrationForm/> )    
             }
 
             <p>
