@@ -14,7 +14,7 @@ const Dashboard = () => {
   return (
     <div className="dashboard">
         <header className="dashboard-header">
-            <h1>Welcome to the dashboard, {user?.username}.</h1>
+            <h1>Welcome to Chronica, {user?.username}.</h1>
             <button
                 onClick={handleLogout}
                 className="logout-button"
