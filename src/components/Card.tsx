@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useAuth } from "../App";
 import CharacterCard from '../types/CharacterCard';
+import profilePic from '../images/profilePic/ceciliaprofile.png';
 
 const Card = () => {
     
@@ -16,7 +17,9 @@ const Card = () => {
         // and a button to delete the card
         // as well as a button somewhere to add new cards
         <div className="card">
-            
+            <img className="card-image" src={profilePic} alt='Profile picture for Cecilia'></img>
+            <h2>mAcular</h2>
+            <p>This is a character card.</p>
         </div>
     );
 }

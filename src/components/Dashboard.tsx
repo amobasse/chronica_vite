@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../App.tsx";
 import { User } from "../types/User";
+import Card from './Card.tsx';
 
 const Dashboard = () => {
   const { user, setUser, showLogin, setShowLogin } = useAuth();
@@ -29,6 +30,7 @@ const Dashboard = () => {
         <div className="dashboard-content">
             <h2>Dashboard Content</h2>
             <p>This is where future content will go.</p>
+            <Card />
         </div>
     </div>
   );
