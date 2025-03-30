@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "../App.tsx";
 import { User } from "../types/User";
 import Card from './Card.tsx';
-import { CharacterCard } from '../types/CharacterCard.ts';
+import CharacterCard from '../types/CharacterCard.ts';
+import { getUserCharacters, createCharacter } from '../services/characterService';
 
 const Dashboard = () => {
   const { user, setUser, showLogin, setShowLogin } = useAuth();
