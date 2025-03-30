@@ -213,6 +213,40 @@ app.post('/api/users/login', (req, res) => {
     }
 });
 
+const getCharacters = () => {
+    try {
+        const data = fs.readFileSync(CHARACTERS_FILE, 'utf8');
+        return JSON.parse(data);        
+    } catch (error) {
+        console.error(`An error happened: ${error}`);
+        return [];
+    }
+};
+
+const saveCharacters = (characters) => {
+    try {
+        fs.writeFileSync(CHARACTERS_FILE, JSON.stringify(characters, null, 2));
+        return true;
+    } catch (error) {
+        console.error(`An error happened saving characters: ${error}`);
+        return false;
+    }
+};
+
+// get all characters for a specific username
+app.get('/api/characters/:userId', (req, res) => {
+    try {
+        const { userId } = req.params;
+        const characters = getCharacters();
+        const userCharacters = characters.filter(char => char.userId === userId);
+        res.json({ success: true, characters: userCharacters });
+    } catch (error) {
+        console.error(`An arror occurred getting the characters: ${error}`);
+        res.status(500).json({ success: false, message: "Server error" });
+    }
+});
+
+
 app.listen(PORT, () => {
     console.log(`The server is listening on http://localhost:${PORT}`);
 })

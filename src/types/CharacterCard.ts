@@ -6,7 +6,8 @@ type CharacterCard = {
     race: string,
     avatar: string,
     charFC: string,
-    username: string
+    username: string,
+    userId: string
 }
 
 export default CharacterCard;
