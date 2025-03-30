@@ -5,7 +5,7 @@ const API_URL = 'http://localhost:3001/api';
 export const getUserCharacters = async (userId: string): Promise<CharacterCard[]> => {
     try {
         const response = await fetch(`${API_URL}/characters/${userId}`);
-        const data = response.json();
+        const data = await response.json();
 
         if (!response.ok) {
             console.error(`Fetching the characters failed: ${data.message}`);
@@ -30,7 +30,7 @@ export const createCharacter = async (character: Omit<CharacterCard, 'id'>) => {
             
         });
 
-        const data = response.json();
+        const data = await response.json();
 
         if (!response.ok) {
             console.error(`Something went wrong creating the character: ${data.message}`);
