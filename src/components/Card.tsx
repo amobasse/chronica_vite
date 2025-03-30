@@ -18,8 +18,8 @@ const Card = () => {
         // as well as a button somewhere to add new cards
         <div className="card">
             <img className="card-image" src={profilePic} alt='Profile picture for Cecilia'></img>
-            <h2>mAcular</h2>
-            <p>This is a character card.</p>
+            <h2 className="card-title">mAcular</h2>
+            <p className="card-text">This is a character card.</p>
         </div>
     );
 }
