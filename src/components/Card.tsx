@@ -26,7 +26,7 @@ const Card = ({ character }: CardProps) => {
             <div className="card-text">
                 <p><strong>Level:</strong> {character.level}</p>
                 <p><strong>Race:</strong> {character.race}</p>
-                <p><strong>Class:</strong> {character.class}</p>
+                <p><strong>Class:</strong> {character.charClass}</p>
             </div>
         </div>
     );

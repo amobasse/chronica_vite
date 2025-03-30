@@ -1,7 +1,7 @@
 type CharacterCard = {
     id: string,
     characterName: string,
-    class: string,
+    charClass: string,
     level: string,
     race: string,
     avatar: string,
