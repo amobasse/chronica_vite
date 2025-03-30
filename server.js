@@ -97,9 +97,11 @@ app.post('/api/users/register', (req, res) => {
     users.push(newUser);
 
     if (saveUsers(users)) {
+        const { password, ...userWithoutPassword } = newUser;
         res.status(200).json({
             success: true,
-            message: 'Account successfully created!'
+            message: 'Account successfully created!',
+            user: userWithoutPassword
         });
     } else {
         res.status(400).json({

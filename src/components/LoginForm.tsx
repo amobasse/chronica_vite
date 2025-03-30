@@ -24,7 +24,7 @@ const LoginForm = () => {
 
             console.log(`On login, email is ${email} and password is ${password}.`);
             console.log(JSON.stringify(result));
-            if (result.success && result.user?.username) {
+            if (result.success && result.user) {
                 setUser(result.user);
                 setMessage(`Welcome back, ${user?.username}!`);
             } else {
@@ -59,6 +59,7 @@ const LoginForm = () => {
                 />
 
                 <button
+                    className="login-button"
                     type='submit'
                     //disabled={!email || !password}
                 >

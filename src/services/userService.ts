@@ -18,7 +18,7 @@ export const registerUser = async ({
   username,
   email,
   password,
-}: RegParams): Promise<{ success: boolean; message?: string }> => {
+}: RegParams): Promise<{ success: boolean; user?: User, message?: string }> => {
   try {
     // get all users from API backend
     const response = await fetch(`${API_URL}/users/register`, {

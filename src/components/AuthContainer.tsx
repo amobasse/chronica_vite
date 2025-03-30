@@ -24,11 +24,11 @@ const AuthContainer = () => {
 
             <p>
                 { showLogin ? "Don't have an account?" : "Already have an account?" }
+                                
                 <button
                     onClick={() => setShowLogin(!showLogin)}
                     className='text-button'
                 >
-
                     { showLogin ? "Create Account" : "Login" }
                 </button>
             </p>

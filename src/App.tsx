@@ -2,6 +2,7 @@ import AuthContainer from './components/AuthContainer';
 import './styles/App.css'
 import { User } from './types/User';
 import { createContext, useContext, useState } from 'react';
+import './styles/auth.css';
 
 export const AuthContext = createContext({
   user: null as User | null,

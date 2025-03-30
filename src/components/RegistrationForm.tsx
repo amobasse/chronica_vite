@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { registerUser } from '../services/userService';
+import { useAuth } from "../App.tsx";
 
 const RegistrationForm = () => {
+    const { user, setUser } = useAuth();
     const [username, setUsername] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
@@ -18,8 +20,9 @@ const RegistrationForm = () => {
         try {
             const result = await registerUser({ username, email, password });
 
-            if (result.success) {
-                setMessage(`Welcome back, ${username}!`);
+            if (result.success && result.user) {
+                setUser(result.user);
+                setMessage(`Accounted created, ${user?.username}!`);
             } else {
                 setMessage(`Invalid submission.`);
             }
