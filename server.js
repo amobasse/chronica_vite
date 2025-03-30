@@ -24,6 +24,7 @@ console.log(`dirname is ${__dirname}`);
 //create the dir and file if they aren't made yet
 
 const USERS_FILE = path.join(__dirname, 'data', 'users.json');
+const CHARACTERS_FILE = path.join(__dirname, 'data', 'characters.json');
 
 const initializeDataStorage = () => {
   try {
@@ -59,7 +60,42 @@ const initializeDataStorage = () => {
   }
 };
 
+const initializeCharacterStorage = () => {
+  try {
+    // Check if data directory exists
+    if (!fs.existsSync(dataDir)) {
+      console.log(`Data directory does not exist. Creating: ${dataDir}`);
+      fs.mkdirSync(dataDir, { recursive: true });
+      console.log(`Data directory created successfully`);
+    } else {
+      console.log(`Data directory exists: ${dataDir}`);
+    }
+
+    // Check if characters.json file exists
+    if (!fs.existsSync(CHARACTERS_FILE)) {
+      console.log(`Characters file does not exist. Creating: ${CHARACTERS_FILE}`);
+      fs.writeFileSync(CHARACTERS_FILE, JSON.stringify([], null, 2));
+    } else {
+      console.log(`Characters file exists: ${CHARACTERS_FILE}`);
+      
+      // Validate if the file contains valid JSON
+      try {
+        const data = fs.readFileSync(CHARACTERS_FILE, 'utf8');
+        JSON.parse(data);
+      } catch (parseError) {
+        console.warn(`Characters file contains invalid JSON.`);
+      }
+    }
+
+    return true;
+  } catch (error) {
+    console.error(`Failed to initialize character storage:`, error);
+    return false;
+  }
+};
+
 initializeDataStorage();
+initializeCharacterStorage();
 
 try {
     const testRead = fs.readFileSync(USERS_FILE, 'utf8');
