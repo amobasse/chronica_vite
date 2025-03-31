@@ -297,6 +297,26 @@ app.post("/api/characters", (req, res) => {
   }
 });
 
+app.delete('/api/characters/:id', (req, res) => {
+    try {
+        const { id } = req.params;
+        const characters = getCharacters();
+        const initialLength = characters.length;
+
+        newCharacters = characters.filter(char => char.id != id);
+
+        if (newCharacter.length === initialLength) {
+            return res.status(404).json({ success: false, message: `Character notfound.`});
+        }
+        saveCharacters(newCharacters);
+
+        res.status(201).json({ success: true, message: `Character deleted.`});
+    } catch (error) {
+        console.error(`Error occurred during deletion: ${error}`);
+        res.status(500).json({ success: false, message: "Deletion failed." });
+    }
+});
+
 app.listen(PORT, () => {
   console.log(`The server is listening on http://localhost:${PORT}`);
 });
