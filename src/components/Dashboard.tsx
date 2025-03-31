@@ -7,6 +7,7 @@ import {
   getUserCharacters,
   createCharacter,
   deleteCharacter,
+  updateCharacter
 } from "../services/characterService";
 
 const Dashboard = () => {
@@ -19,8 +20,7 @@ const Dashboard = () => {
     setShowLogin(true);
   };
 
-  useEffect(() => {
-    const fetchCharacters = async () => {
+  const fetchCharacters = async () => {
       if (user?.id) {
         setLoading(true);
         const userCharacters = await getUserCharacters(user.id);
@@ -29,6 +29,7 @@ const Dashboard = () => {
       }
     };
 
+  useEffect(() => {
     fetchCharacters();
   }, [user?.id]);
 
@@ -39,6 +40,14 @@ const Dashboard = () => {
       setCharacters((prevChar) =>
         prevChar.filter((char) => char.id !== characterId)
       );
+    }
+  };
+
+  const handleEditCharacter = async (updatedCharacter: CharacterCard) => {
+    console.log(`Dashboard: editing character: ${updatedCharacter}`);
+    const success = await updateCharacter(updatedCharacter);
+    if (success) {
+      fetchCharacters();
     }
   };
 
@@ -73,6 +82,7 @@ const Dashboard = () => {
                 key={character.id}
                 character={character}
                 onDelete={handleDeleteCharacter}
+                onUpdate={handleEditCharacter}
               />
             ))}
           </div>

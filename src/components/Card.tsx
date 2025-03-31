@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "../App";
 import CharacterCard from "../types/CharacterCard";
 import DeleteCharModal from "./DeleteCharModal";
@@ -13,6 +13,9 @@ type CardProps = {
 const Card = ({ character, onDelete, onUpdate }: CardProps) => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
+  const [cardCharacter, setCardCharacter] = useState(character);
+  // TO DO: come back and clean up cardCharacter being used as state when other places use
+  // character as state, its redundant
 
   const profilePic = `../../images/profilePictures/${character.avatar}`;
 
@@ -26,6 +29,7 @@ const Card = ({ character, onDelete, onUpdate }: CardProps) => {
 
   const handleEditConfirm = (updatedCharacter: CharacterCard) => {
     onUpdate(updatedCharacter);
+    setCardCharacter(updatedCharacter);
     setShowEditModal(false);
   };
 
@@ -41,6 +45,10 @@ const Card = ({ character, onDelete, onUpdate }: CardProps) => {
     onDelete(character.id);
     setShowDeleteModal(false);
   };
+
+  useEffect(() => {
+
+  }, [character]);
 
   return (
     // have image with border-radius being 50%
@@ -86,16 +94,16 @@ const Card = ({ character, onDelete, onUpdate }: CardProps) => {
         src={profilePic}
         alt="Profile picture for Cecilia"
       ></img>
-      <h2 className="card-title">{character.characterName}</h2>
+      <h2 className="card-title">{cardCharacter.characterName}</h2>
       <div className="card-text">
         <p>
-          <strong>Level:</strong> {character.level}
+          <strong>Level:</strong> {cardCharacter.level}
         </p>
         <p>
-          <strong>Race:</strong> {character.race}
+          <strong>Race:</strong> {cardCharacter.race}
         </p>
         <p>
-          <strong>Class:</strong> {character.charClass}
+          <strong>Class:</strong> {cardCharacter.charClass}
         </p>
       </div>
 
@@ -104,14 +112,14 @@ const Card = ({ character, onDelete, onUpdate }: CardProps) => {
         onClose={handleDeleteCancel}
         onConfirm={handleDeleteConfirm}
         title="Delete Character"
-        message={`Are you sure you want to delete ${character.characterName}? This action cannot be undone.`}
+        message={`Are you sure you want to delete ${cardCharacter.characterName}? This action cannot be undone.`}
       />
 
       <EditCharacterModal
         isOpen={showEditModal}
         onClose={handleEditCancel}
         onSave={handleEditConfirm}
-        character={character}
+        character={cardCharacter}
       />
     </div>
   );

@@ -318,17 +318,17 @@ app.delete('/api/characters/:id', (req, res) => {
     }
 });
 
-app.post('/api/characters/:id', (req, res) => {
+app.put('/api/characters/:id', (req, res) => {
     try {
         const { id } = req.params;
         const updatedCharacter = req.body;
 
         if (!updatedCharacter || !id ) {
-            return res.status(500).json({ success: false, message: `Missing character or ID for update.`});    
+            return res.status(400).json({ success: false, message: `Missing character or ID for update.`});    
         }
 
         if (updatedCharacter.id !== id) {
-            return res.status(500).json({ success: false, message: `Given ID doesn't match character's`});
+            return res.status(400).json({ success: false, message: `Given ID doesn't match character's`});
         }
 
         const characters = getCharacters();
@@ -336,7 +336,7 @@ app.post('/api/characters/:id', (req, res) => {
         const characterIndex = characters.findIndex(char => char.id === id);
 
         if (characterIndex === -1) {
-            return res.status(500).json({ success: false, message: "Character not found in data store."});
+            return res.status(404).json({ success: false, message: "Character not found in data store."});
         }
 
         characters[characterIndex] = {
@@ -348,7 +348,7 @@ app.post('/api/characters/:id', (req, res) => {
 
         const saveUsers = saveCharacters(characters);
 
-        if (!saveResult) {
+        if (!saveUsers) {
             return res.status(500).json({ success: false, message: `Saving update to character failed.`});
         }
 
