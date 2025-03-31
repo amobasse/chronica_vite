@@ -64,3 +64,27 @@ export const deleteCharacter = async (characterId: string): Promise<boolean> => 
         return false;
     }
 };
+
+export const updateCharacter = async (character: CharacterCard): Promise<boolean> => {
+    try {
+        const response = await fetch(`${API_URL}/characters/${character.id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(character)
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.error(`Error updating character: ${data.message}`);
+            return false;
+        }
+
+        return data.success;
+    } catch (error) {
+        console.error(`Updating the character failed: ${error}`);
+        return false;
+    }
+};
