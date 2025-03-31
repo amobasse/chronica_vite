@@ -71,7 +71,15 @@ const Dashboard = () => {
       </div>
 
       <div className="dashboard-content">
-        <h2>Your Characters</h2>
+        <div className="characters-header">
+          <h2>Your Characters</h2>
+          <button
+            className="create-character-button"
+            aria-label="Create new character"
+          >
+            +
+          </button>
+        </div>
 
         {loading ? (
           <p>Loading your characters...</p>
