@@ -102,13 +102,29 @@ const EditCharacterModal = ({
 
           <div className="form-group">
             <label htmlFor="race">Race:</label>
-            <input
+            <select
               id="race"
-              type="text"
               value={race}
               onChange={(e) => setRace(e.target.value)}
               required
-            />
+            >
+              <option value="Aasimar">Aasimar</option>
+              <option value="Dragonborn">Dragonborn</option>
+              <option value="Drow">Drow</option>
+              <option value="Forest Gnome">Forest Gnome</option>
+              <option value="Goliath">Goliath</option>
+              <option value="Human">Human</option>
+              <option value="Half-elf">Half-elf</option>
+              <option value="Half-orc">Half-orc</option>
+              <option value="Hill Dwarf">Hill Dwarf</option>
+              <option value="High Elf">High Elf</option>
+              <option value="Lightfoot Halfling">Lightfoot Halfling</option>
+              <option value="Mountain Dwarf">Mountain Dwarf</option>
+              <option value="Rock Gnome">Rock Gnome</option>
+              <option value="Stout Halfling">Stout Halfling</option>
+              <option value="Tiefling">Tiefling</option>
+              <option value="Wood Elf">Wood Elf</option>
+            </select>
           </div>
 
           <div className="form-group">
@@ -119,28 +135,27 @@ const EditCharacterModal = ({
               onChange={(e) => setCharClass(e.target.value)}
               required
             >
-                <option value="Artificer">Artificer</option>
-                <option value="Barbarian">Barbarian</option>
-                <option value="Bard">Bard</option>
-                <option value="Blood Hunter">Blood Hunter</option>
-                <option value="Cleric">Cleric</option>
-                <option value="Dark Knight">Dark Knight</option>
-                <option value="Druid">Druid</option>
-                <option value="Fighter">Fighter</option>
-                <option value="Monk">Monk</option>
-                <option value="Mystic">Mystic</option>
-                <option value="Paladin">Paladin</option>
-                <option value="Psion">Psion</option>
-                <option value="Occultist">Occultist</option>
-                <option value="Ranger">Ranger</option>
-                <option value="Rogue">Rogue</option>
-                <option value="Sorcerer">Sorcerer</option>
-                <option value="Spellblade">Spellblade</option>
-                <option value="Warden">Warden</option>
-                <option value="Warlock">Warlock</option>
-                <option value="Warlord">Warlord</option>
-                <option value="Wizard">Wizard</option>
-
+              <option value="Artificer">Artificer</option>
+              <option value="Barbarian">Barbarian</option>
+              <option value="Bard">Bard</option>
+              <option value="Blood Hunter">Blood Hunter</option>
+              <option value="Cleric">Cleric</option>
+              <option value="Dark Knight">Dark Knight</option>
+              <option value="Druid">Druid</option>
+              <option value="Fighter">Fighter</option>
+              <option value="Monk">Monk</option>
+              <option value="Mystic">Mystic</option>
+              <option value="Paladin">Paladin</option>
+              <option value="Psion">Psion</option>
+              <option value="Occultist">Occultist</option>
+              <option value="Ranger">Ranger</option>
+              <option value="Rogue">Rogue</option>
+              <option value="Sorcerer">Sorcerer</option>
+              <option value="Spellblade">Spellblade</option>
+              <option value="Warden">Warden</option>
+              <option value="Warlock">Warlock</option>
+              <option value="Warlord">Warlord</option>
+              <option value="Wizard">Wizard</option>
             </select>
           </div>
 
