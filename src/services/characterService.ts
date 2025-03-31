@@ -43,3 +43,23 @@ export const createCharacter = async (character: Omit<CharacterCard, 'id'>) => {
         return null;
     }
 };
+
+export const deleteCharacter = async (characterId: string): Promise<boolean> => {
+    try {
+        const response = await fetch(`${API_URL}/characters/${characterId}`, {
+            method: 'DELETE'
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.error(`Deletion failed: ${data.message}`);
+            return false;   
+        }
+
+        return data.success;
+    } catch (error) {
+        console.error(`Sending delete to API failed.`);
+        return false;
+    }
+};
