@@ -67,7 +67,6 @@ export const deleteCharacter = async (characterId: string): Promise<boolean> => 
 
 export const updateCharacter = async (character: CharacterCard): Promise<boolean> => {
     try {
-        console.log(`Inside updateCharacter`);
         const response = await fetch(`${API_URL}/characters/${character.id}`, {
             method: 'PUT',
             headers: {

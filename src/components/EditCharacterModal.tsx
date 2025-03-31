@@ -82,10 +82,7 @@ const EditCharacterModal = ({
               id="name"
               type="text"
               value={characterName}
-              onChange={(e) => {
-                console.log(`${characterName} in value of name field`);
-                setCharacterName(e.target.value);
-              }}
+              onChange={(e) => setCharacterName(e.target.value)}
               required
             />
           </div>
@@ -109,10 +106,7 @@ const EditCharacterModal = ({
               id="race"
               type="text"
               value={race}
-              onChange={(e) => {
-                console.log(`${race} in value of name field`);
-                setRace(e.target.value);
-              }}
+              onChange={(e) => setRace(e.target.value)}
               required
             />
           </div>
