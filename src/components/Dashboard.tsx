@@ -33,6 +33,7 @@ const Dashboard = () => {
   }, [user?.id]);
 
   const handleDeleteCharacter = async (characterId: string) => {
+    console.log(`Dashboard: deleting character with ID ${characterId}`);
     const success = await deleteCharacter(characterId);
     if (success) {
       setCharacters((prevChar) =>

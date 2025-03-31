@@ -300,12 +300,13 @@ app.post("/api/characters", (req, res) => {
 app.delete('/api/characters/:id', (req, res) => {
     try {
         const { id } = req.params;
+        console.log(`API receiving character id ${id}`);
         const characters = getCharacters();
         const initialLength = characters.length;
 
-        newCharacters = characters.filter(char => char.id != id);
+        const newCharacters = characters.filter(char => char.id != id);
 
-        if (newCharacter.length === initialLength) {
+        if (newCharacters.length === initialLength) {
             return res.status(404).json({ success: false, message: `Character notfound.`});
         }
         saveCharacters(newCharacters);

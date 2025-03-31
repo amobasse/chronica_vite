@@ -46,6 +46,7 @@ export const createCharacter = async (character: Omit<CharacterCard, 'id'>) => {
 
 export const deleteCharacter = async (characterId: string): Promise<boolean> => {
     try {
+        console.log(`Deleting character ID with ID ${characterId}`);
         const response = await fetch(`${API_URL}/characters/${characterId}`, {
             method: 'DELETE'
         });
