@@ -318,6 +318,47 @@ app.delete('/api/characters/:id', (req, res) => {
     }
 });
 
+app.post('/api/characters/:id', (req, res) => {
+    try {
+        const { id } = req.params;
+        const updatedCharacter = req.body;
+
+        if (!updatedCharacter || !id ) {
+            return res.status(500).json({ success: false, message: `Missing character or ID for update.`});    
+        }
+
+        if (updatedCharacter.id !== id) {
+            return res.status(500).json({ success: false, message: `Given ID doesn't match character's`});
+        }
+
+        const characters = getCharacters();
+
+        const characterIndex = characters.findIndex(char => char.id === id);
+
+        if (characterIndex === -1) {
+            return res.status(500).json({ success: false, message: "Character not found in data store."});
+        }
+
+        characters[characterIndex] = {
+            ...characters[characterIndex],
+            ...updatedCharacter,
+            id,
+            userId: characters[characterIndex].userId
+        };
+
+        const saveUsers = saveCharacters(characters);
+
+        if (!saveResult) {
+            return res.status(500).json({ success: false, message: `Saving update to character failed.`});
+        }
+
+        return res.json({ sucess: true, character: characters[characterIndex]});
+    } catch (error) {
+        console.error(`API character update failed: ${error}`);
+        return res.status(500).json({ success: false, message: `Server error when updating character: ${error}`});
+    }
+});
+
 app.listen(PORT, () => {
   console.log(`The server is listening on http://localhost:${PORT}`);
 });
