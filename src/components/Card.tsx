@@ -2,12 +2,29 @@ import { useState } from "react";
 import { useAuth } from "../App";
 import CharacterCard from "../types/CharacterCard";
 import profilePic from "../../images/profilePictures/ceciliaprofile.png";
+import DeleteCharModal from "./DeleteCharModal";
 
 type CardProps = {
   character: CharacterCard;
+  onDelete: (characterId: string) => void;
 };
 
-const Card = ({ character }: CardProps) => {
+const Card = ({ character, onDelete }: CardProps) => {
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+
+    const handleDeleteClick = () => {
+        setShowDeleteModal(true);
+    };
+
+    const handleDeleteCancel = () => {
+        setShowDeleteModal(false);
+    };
+
+    const handleDeleteConfirm = () => {
+        onDelete(character.id);
+        setShowDeleteModal(false);
+    };
+
   return (
     // have image with border-radius being 50%
     // pull character data based on the user
@@ -21,7 +38,11 @@ const Card = ({ character }: CardProps) => {
     // as well as a button somewhere to add new cards
     <div className="card">
       <div className="card-actions">
-        <button className="delete-button" aria-label="Delete character">
+        <button
+          className="delete-button"
+          aria-label="Delete character"
+          onClick={handleDeleteClick}
+        >
           <svg
             viewBox="0 0 24 24"
             width="14"
@@ -56,6 +77,14 @@ const Card = ({ character }: CardProps) => {
           <strong>Class:</strong> {character.charClass}
         </p>
       </div>
+
+      <DeleteCharModal
+        isOpen={showDeleteModal}
+        onClose={handleDeleteCancel}
+        onConfirm={handleDeleteConfirm}
+        title="Delete Character"
+        message={`Are you sure you want to delete ${character.characterName}? This action cannot be undone.`}
+      />
     </div>
   );
 };
