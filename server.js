@@ -318,6 +318,7 @@ app.delete('/api/characters/:id', (req, res) => {
     }
 });
 
+//update character
 app.put('/api/characters/:id', (req, res) => {
     try {
         const { id } = req.params;
@@ -345,6 +346,8 @@ app.put('/api/characters/:id', (req, res) => {
             id,
             userId: characters[characterIndex].userId
         };
+
+        console.log(`Updated character is ${JSON.stringify(characters[characterIndex])}`);
 
         const saveUsers = saveCharacters(characters);
 

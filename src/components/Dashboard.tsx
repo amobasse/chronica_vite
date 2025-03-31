@@ -44,9 +44,10 @@ const Dashboard = () => {
   };
 
   const handleEditCharacter = async (updatedCharacter: CharacterCard) => {
-    console.log(`Dashboard: editing character: ${updatedCharacter}`);
+    console.log(`Dashboard: editing character: ${JSON.stringify(updatedCharacter)}`);
     const success = await updateCharacter(updatedCharacter);
     if (success) {
+        console.log(`Edit successful!`);
       fetchCharacters();
     }
   };

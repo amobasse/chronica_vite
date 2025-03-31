@@ -14,7 +14,7 @@ const EditCharacterModal = ({
   onSave,
   character,
 }: EditCharacterModalProps) => {
-  const [name, setName] = useState(character.characterName);
+  const [characterName, setCharacterName] = useState(character.characterName);
   const [level, setLevel] = useState(character.level);
   const [race, setRace] = useState(character.race);
   const [charClass, setCharClass] = useState(character.charClass);
@@ -23,7 +23,7 @@ const EditCharacterModal = ({
 
   useEffect(() => {
     if (isOpen) {
-      setName(character.characterName);
+      setCharacterName(character.characterName);
       setLevel(character.level);
       setRace(character.race);
       setCharClass(character.charClass);
@@ -37,7 +37,7 @@ const EditCharacterModal = ({
 
     const updatedCharacter = {
       ...character,
-      name,
+      characterName,
       charClass,
       race,
       level,
@@ -81,8 +81,11 @@ const EditCharacterModal = ({
             <input
               id="name"
               type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={characterName}
+              onChange={(e) => {
+                console.log(`${characterName} in value of name field`);
+                setCharacterName(e.target.value);
+              }}
               required
             />
           </div>
@@ -106,7 +109,10 @@ const EditCharacterModal = ({
               id="race"
               type="text"
               value={race}
-              onChange={(e) => setRace(e.target.value)}
+              onChange={(e) => {
+                console.log(`${race} in value of name field`);
+                setRace(e.target.value);
+              }}
               required
             />
           </div>
