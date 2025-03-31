@@ -113,13 +113,35 @@ const EditCharacterModal = ({
 
           <div className="form-group">
             <label htmlFor="class">Class:</label>
-            <input
+            <select
               id="class"
-              type="text"
               value={charClass}
               onChange={(e) => setCharClass(e.target.value)}
               required
-            />
+            >
+                <option value="Artificer">Artificer</option>
+                <option value="Barbarian">Barbarian</option>
+                <option value="Bard">Bard</option>
+                <option value="Blood Hunter">Blood Hunter</option>
+                <option value="Cleric">Cleric</option>
+                <option value="Dark Knight">Dark Knight</option>
+                <option value="Druid">Druid</option>
+                <option value="Fighter">Fighter</option>
+                <option value="Monk">Monk</option>
+                <option value="Mystic">Mystic</option>
+                <option value="Paladin">Paladin</option>
+                <option value="Psion">Psion</option>
+                <option value="Occultist">Occultist</option>
+                <option value="Ranger">Ranger</option>
+                <option value="Rogue">Rogue</option>
+                <option value="Sorcerer">Sorcerer</option>
+                <option value="Spellblade">Spellblade</option>
+                <option value="Warden">Warden</option>
+                <option value="Warlock">Warlock</option>
+                <option value="Warlord">Warlord</option>
+                <option value="Wizard">Wizard</option>
+
+            </select>
           </div>
 
           <div className="modal-buttons">
