@@ -1,29 +1,46 @@
 import { useState } from "react";
 import { useAuth } from "../App";
 import CharacterCard from "../types/CharacterCard";
-import profilePic from "../../images/profilePictures/ceciliaprofile.png";
 import DeleteCharModal from "./DeleteCharModal";
+import EditCharacterModal from "./EditCharacterModal";
 
 type CardProps = {
   character: CharacterCard;
   onDelete: (characterId: string) => void;
+  onUpdate: (updatedCharacter: CharacterCard) => void;
 };
 
-const Card = ({ character, onDelete }: CardProps) => {
-    const [showDeleteModal, setShowDeleteModal] = useState(false);
+const Card = ({ character, onDelete, onUpdate }: CardProps) => {
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
 
-    const handleDeleteClick = () => {
-        setShowDeleteModal(true);
-    };
+  const profilePic = `../../images/profilePictures/${character.avatar}`;
 
-    const handleDeleteCancel = () => {
-        setShowDeleteModal(false);
-    };
+  const handleEditClick = () => {
+    setShowEditModal(true);
+  };
 
-    const handleDeleteConfirm = () => {
-        onDelete(character.id);
-        setShowDeleteModal(false);
-    };
+  const handleEditCancel = () => {
+    setShowEditModal(false);
+  };
+
+  const handleEditConfirm = (updatedCharacter: CharacterCard) => {
+    onUpdate(updatedCharacter);
+    setShowEditModal(false);
+  };
+
+  const handleDeleteClick = () => {
+    setShowDeleteModal(true);
+  };
+
+  const handleDeleteCancel = () => {
+    setShowDeleteModal(false);
+  };
+
+  const handleDeleteConfirm = () => {
+    onDelete(character.id);
+    setShowDeleteModal(false);
+  };
 
   return (
     // have image with border-radius being 50%
@@ -55,7 +72,11 @@ const Card = ({ character, onDelete }: CardProps) => {
             <line x1="6" y1="6" x2="18" y2="18"></line>
           </svg>
         </button>
-        <button className="edit-button" aria-label="Edit character">
+        <button
+          className="edit-button"
+          aria-label="Edit character"
+          onClick={handleEditClick}
+        >
           ✎
         </button>
       </div>
@@ -84,6 +105,13 @@ const Card = ({ character, onDelete }: CardProps) => {
         onConfirm={handleDeleteConfirm}
         title="Delete Character"
         message={`Are you sure you want to delete ${character.characterName}? This action cannot be undone.`}
+      />
+
+      <EditCharacterModal
+        isOpen={showEditModal}
+        onClose={handleEditCancel}
+        onSave={handleEditConfirm}
+        character={character}
       />
     </div>
   );
