@@ -108,6 +108,7 @@ const EditCharacterModal = ({
               onChange={(e) => setRace(e.target.value)}
               required
             >
+              {/* TODO: pull this from a database/file later and populate dynamically */}
               <option value="Aasimar">Aasimar</option>
               <option value="Dragonborn">Dragonborn</option>
               <option value="Drow">Drow</option>
@@ -135,6 +136,7 @@ const EditCharacterModal = ({
               onChange={(e) => setCharClass(e.target.value)}
               required
             >
+              {/* TODO: pull this from a database/file later and populate dynamically */}
               <option value="Artificer">Artificer</option>
               <option value="Barbarian">Barbarian</option>
               <option value="Bard">Bard</option>
