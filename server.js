@@ -279,7 +279,7 @@ app.post("/api/characters", (req, res) => {
       charClass: charClass,
       level: level,
       race: race,
-      avatar: avatar,
+      avatar: "../../images/profilePictures/Twitter_default_profile_400x400.png",
       charFC: charFC,
       username: username,
       userId: userId,
@@ -288,7 +288,7 @@ app.post("/api/characters", (req, res) => {
     characters.push(newCharacter);
     saveCharacters(characters); // currently rewrites file, i want it to append later
 
-    res.status(201).json({ success: true, message: `Character created: ${newCharacter}`});
+    res.status(201).json({ success: true, message: `Character created: ${newCharacter}`, character: newCharacter});
   } catch (error) {
     console.error(`Error occurred: ${error}`);
     res

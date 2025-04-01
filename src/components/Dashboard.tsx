@@ -9,11 +9,13 @@ import {
   deleteCharacter,
   updateCharacter
 } from "../services/characterService";
+import CreateCharacterModal from "./CreateCharacterModal.tsx";
 
 const Dashboard = () => {
   const { user, setUser, showLogin, setShowLogin } = useAuth();
   const [characters, setCharacters] = useState<CharacterCard[]>([]);
   const [loading, setLoading] = useState(true);
+  const [showCreateModal, setShowCreateModal] = useState(false);
 
   const handleLogout = () => {
     setUser(null);
@@ -32,6 +34,21 @@ const Dashboard = () => {
   useEffect(() => {
     fetchCharacters();
   }, [user?.id]);
+
+  const handleCreateCharacter = async (newCharacterData: Omit<CharacterCard, 'id'>) => {
+    if (!user?.id) return;
+
+    console.log(`Preparing new character: ${JSON.stringify(newCharacterData)}`);
+
+    const result = await createCharacter(newCharacterData);
+
+    if (result && result.success && result.character) {
+        setCharacters(prevChar => [...prevChar, result.character]);
+        setShowCreateModal(false);
+    } else {
+        console.error(`Char creation failed.`);
+    }
+  };
 
   const handleDeleteCharacter = async (characterId: string) => {
     console.log(`Dashboard: deleting character with ID ${characterId}`);
@@ -77,6 +94,7 @@ const Dashboard = () => {
           <button
             className="create-character-button"
             aria-label="Create new character"
+            onClick={() => setShowCreateModal(true)}
           >
             +
           </button>
@@ -99,6 +117,14 @@ const Dashboard = () => {
           <p>You don't have any characters yet. Create one to get started.</p>
         )}
       </div>
+
+      <CreateCharacterModal
+        isOpen={showCreateModal}
+        onClose={() => setShowCreateModal(false)}
+        onSave={handleCreateCharacter}
+        userId={"04d5ecf2-3dc2-40a7-985b-16d0942d184c"}
+        username="mAc Chaos"
+      />
     </div>
   );
 };

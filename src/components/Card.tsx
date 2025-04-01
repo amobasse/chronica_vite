@@ -18,7 +18,7 @@ const Card = ({ character, onDelete, onUpdate }: CardProps) => {
   // character as state, its redundant
 
   const profilePic = `../../images/profilePictures/${character.avatar}`;
-
+  
   const handleEditClick = () => {
     setShowEditModal(true);
   };
@@ -92,7 +92,7 @@ const Card = ({ character, onDelete, onUpdate }: CardProps) => {
       <img
         className="card-image"
         src={profilePic}
-        alt="Profile picture for Cecilia"
+        alt="Profile picture"
       ></img>
       <h2 className="card-title">{cardCharacter.characterName}</h2>
       <div className="card-text">

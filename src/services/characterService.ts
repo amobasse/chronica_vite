@@ -34,10 +34,10 @@ export const createCharacter = async (character: Omit<CharacterCard, 'id'>) => {
 
         if (!response.ok) {
             console.error(`Something went wrong creating the character: ${data.message}`);
-            return null;
+            return { success: false, message: data.message };
         }
 
-        return data.character;
+        return { success: true, message: `Character created.`, character: data.character };
     } catch (error) {
         console.error(`Error creating a character: ${error}`);
         return null;

@@ -97,7 +97,7 @@ const CreateCharacterModal = ({ isOpen, onClose, onSave, userId, username }: Cre
                         </select>
                     </div>
 
-                    <div className="gorm-group">
+                    <div className="form-group">
                         <label htmlFor='race'>Race:</label>
                         <select id='race' value={race} onChange={(e) => setRace(e.target.value)}>
                              <option value="Aasimar">Aasimar</option>
