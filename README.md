@@ -9,4 +9,4 @@ This is still in development. If you want to pull the repo down and run it yours
 ## USING CHRONICA
 
 To use Chronica, clone the repo and run npm install inside the directory.
-There is a characters.json file seeded with premade characters for testing. If you want to see those, you'll have to edit the userId property in the character objects in character.json with the userId from your own account, which can be found in users.json after you created an account. You'll have to edit it manually. The fully finished version of this app will not store these things in git, and have a mongo database instead of a flat file, but for now this is useful for prototyping.
+There is a characters.json file seeded with premade characters for testing. If you want to see those, you'll have to edit the userId property in the character objects in data/characters.json with the userId and username from your own account, which can be found in users.json after you created an account. You'll have to edit it manually. The fully finished version of this app will not store these things in git, and have a mongo database instead of a flat file, but for now this is useful for prototyping.
