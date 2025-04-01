@@ -1,0 +1,24 @@
+[
+  {
+    "id": "1",
+    "characterName": "Raphael",
+    "charClass": "Fighter",
+    "level": "4",
+    "race": "Human",
+    "avatar": "raphaelchronicaav.png",
+    "charFC": "XXX",
+    "username": "amobasse",
+    "userId": "04d5ecf2-3dc2-40a7-985b-16d0942d184c"
+  },
+  {
+    "id": "2",
+    "characterName": "Avriel",
+    "charClass": "Rogue",
+    "level": "4",
+    "race": "Wood Elf",
+    "avatar": "avrielprofilepic.png",
+    "charFC": "XXX",
+    "username": "amobasse",
+    "userId": "04d5ecf2-3dc2-40a7-985b-16d0942d184c"
+  }
+]
