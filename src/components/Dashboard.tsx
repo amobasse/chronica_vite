@@ -122,8 +122,8 @@ const Dashboard = () => {
         isOpen={showCreateModal}
         onClose={() => setShowCreateModal(false)}
         onSave={handleCreateCharacter}
-        userId={"04d5ecf2-3dc2-40a7-985b-16d0942d184c"}
-        username="mAc Chaos"
+        userId={user!.id}
+        username={user!.username}
       />
     </div>
   );
