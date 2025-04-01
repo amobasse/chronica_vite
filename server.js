@@ -279,7 +279,7 @@ app.post("/api/characters", (req, res) => {
       charClass: charClass,
       level: level,
       race: race,
-      avatar: "../../images/profilePictures/Twitter_default_profile_400x400.png",
+      avatar: "Twitter_default_profile_400x400.png",
       charFC: charFC,
       username: username,
       userId: userId,
